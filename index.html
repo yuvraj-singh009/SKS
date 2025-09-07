@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindX - Mental Health Awareness</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="review.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9fb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #4a6cf7;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            position: relative;
+            margin: 0 15px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #4a6cf7;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            display: none;
+            z-index: 10;
+            border-radius: 5px;
+            padding: 10px 0;
+        }
+
+        .nav-menu li:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 10px 20px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .donate {
+            height: 35px;
+            width: 80px;
+            background-color: #7473BA;
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            padding: 2px 13px;
+            padding-top: 4px;
+
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-login {
+            color: #7473BA;
+            margin-right: 10px;
+        }
+
+        .btn-register {
+            background-color: #7473BA;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            /* background:
+                linear-gradient(to right , rgba(117, 117, 168, 0.8),#7e7db2),
+                url('background2.jpg'); */
+            /* background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay; */
+            filter: brightness(100%);
+
+            background-image: url(background3.jpg);
+
+            background-size: cover;
+            background-position: center;
+            color: #ececee;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            border-right: 3px solid white;
+            /* blinking cursor */
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 5s steps(30, end) infinite alternate,
+                 blink 0.7s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 110%
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent
+            }
+        }
+
+
+
+
+
+        .hero p {
+            font-size: 20px;
+            font-weight: bold;
+
+            margin-bottom: 30px;
+            color: rgb(0, 0, 0);
+        }
+
+        .btn-hero {
+            background-color: white;
+            color: #7473BA;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: #f9f9fb;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: #4a6cf7;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* Reports Section */
+        .reports {
+            padding: 80px 0;
+            background-color: #f9f9fb;
+        }
+
+        .reports-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .reports-image {
+            flex: 1;
+        }
+
+        .reports-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .reports-text {
+            flex: 1;
+        }
+
+        .reports-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .reports-text p {
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        /* Chat Options */
+        .chat-options {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .chat-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .chat-card {
+            background: linear-gradient(135deg, #4a6cf7, #6a8eff);
+            border-radius: 10px;
+            padding: 40px 30px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .chat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .chat-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .chat-card p {
+            margin-bottom: 30px;
+        }
+
+        .chat-card .btn {
+            background-color: white;
+            color: #4a6cf7;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1f2b5a;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #b4c2ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b4c2ff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .reports-content {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .auth-buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container nav-container">
+            <div style="padding-top:18px;" class="logo"><img src="logo2.jpg" height="40px" alt=""></div>
+
+            <ul class="nav-menu">
+                <li>
+                    <a href="#">Get Involved</a>
+                    <div class="dropdown">
+                        <a href="#">Volunteer</a>
+                        <a href="#">Partnerships</a>
+                        <a href="#">Events</a>
+                        <a href="#">Awareness Campaigns</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">Learn</a>
+                    <div class="dropdown">
+                        <a href="#">Articles</a>
+                        <a href="#">Resources</a>
+                        <a href="#">Mental Health Guides</a>
+                        <a href="#">Research</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">Get Help</a>
+                    <div class="dropdown">
+                        <a href="#">Crisis Support</a>
+                        <a href="#">Therapy Options</a>
+                        <a href="#">Support Groups</a>
+                        <a href="#">Emergency Contacts</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">About Us</a>
+                    <div class="dropdown">
+                        <a href="#">Our Mission</a>
+                        <a href="#">Team</a>
+                        <a href="#">Success Stories</a>
+                        <a href="#">Testimonials</a>
+                    </div>
+                </li>
+                <li><a href="#">Contact</a></li>
+                <li>
+                    <div class="donate"><a href="#" style="color: white;">Donate</a></div>
+                </li>
+                <li><a href="#"><i class="fas fa-search"></i></a></li>
+            </ul>
+
+            <div class="auth-buttons">
+                <a href="deepprfile.html" class="btn btn-login">Login</a>
+                <a href="#" class="btn btn-register">Register</a>
+            </div>
+
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    <div style="background-color: black; width: 100%; height: 1px;">hy</div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="container hero-content">
+
+            <h1>Shaping the future of Mental Awareness</h1>
+            <p>Your mental wellbeing matters—find guidance, support, and peace of mind in one place.</p>
+            <a href="#" class="btn btn-hero">Learn More About Us</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>How We Can Help</h2>
+                <p>Discover our comprehensive mental health services designed to support your journey to wellness</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Self-Assessment</h3>
+                    <p>Take our scientifically-validated mental health assessments to understand your current state.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Professional Help</h3>
+                    <p>Connect with licensed therapists and mental health professionals for personalized support.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your mental health journey with detailed reports and progress analysis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section class="reports">
+        <div class="container">
+            <div class="reports-content">
+                <div class="reports-text">
+                    <h2>Detailed Mental Health Reports</h2>
+                    <p>Our advanced analysis tools provide comprehensive insights into your mental wellbeing. Track your
+                        progress over time, identify patterns, and receive personalized recommendations.</p>
+                    <p>All reports are confidential and designed to help you and your healthcare provider make informed
+                        decisions about your mental health journey.</p>
+                    <a href="#" class="btn btn-register">View Sample Report</a>
+                </div>
+
+                <div class="reports-image">
+                    <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                        alt="Mental Health Report Example">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Options -->
+    <section class="chat-options">
+        <div class="container">
+            <div class="section-title">
+                <h2>Connect With Support</h2>
+                <p>Choose from our range of communication options to get the help you need</p>
+            </div>
+
+            <div class="chat-cards">
+                <div class="chat-card">
+                    <h3>AI Chat Support</h3>
+                    <p>Get immediate assistance from our AI-powered mental health chatbot, available 24/7 for guidance
+                        and support.</p>
+                    <a href="#" class="btn">Chat Now</a>
+                </div>
+
+                <div class="chat-card">
+                    <h3>Professional Consultation</h3>
+                    <p>Connect with licensed mental health professionals for personalized advice and therapy sessions.
+                    </p>
+                    <a href="#" class="btn">Schedule a Session</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>MindX</h3>
+                    <p>Dedicated to improving mental health awareness and providing support to those in need.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Get Help</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support Groups</a></li>
+                        <li><a href="#">Emergency Contacts</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +1 (800) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> support@mindx.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Wellness St, Mind City</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 MindX Mental Health Awareness. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+
+</html>
